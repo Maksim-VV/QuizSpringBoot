@@ -13,10 +13,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 @EnableConfigurationProperties(AppProp.class)
 public class QuizSpringBootApplication {
 
-    @Autowired
-    QuizSpringBootApplication(AppProp prop) {
-    }
-
     public static void main(String[] args) {
         ConfigurableApplicationContext configurableApplicationContext =
                 SpringApplication.run(QuizSpringBootApplication.class, args);
