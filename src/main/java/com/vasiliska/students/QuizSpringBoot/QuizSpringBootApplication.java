@@ -7,24 +7,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-
+import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
 @EnableConfigurationProperties(AppProp.class)
 public class QuizSpringBootApplication {
 
-    private static String url;
-    private static QuizRunner quiz;
-
     @Autowired
-    QuizSpringBootApplication(AppProp prop, QuizRunner quiz) {
-        this.url = prop.getUrl();
-        this.quiz = quiz;
+    QuizSpringBootApplication(AppProp prop) {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(QuizSpringBootApplication.class, args);
+        ConfigurableApplicationContext configurableApplicationContext =
+                SpringApplication.run(QuizSpringBootApplication.class, args);
 
+        QuizRunner quiz = configurableApplicationContext.getBean(QuizRunner.class);
+        
         quiz.loadQuizData();
         quiz.fillProfileStudent();
         quiz.quizRun();
